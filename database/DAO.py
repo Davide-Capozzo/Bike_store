@@ -1,9 +1,29 @@
 from database.DB_connect import DBConnect
+from model.category import Category
 
 
 class DAO():
     def __init__(self):
         pass
+
+    @staticmethod
+    def getCategorie():
+
+        conn = DBConnect.get_connection()
+
+        results = []
+
+        cursor = conn.cursor(dictionary=True)
+        query = "SELECT * from categories c"
+
+        cursor.execute(query)
+
+        for row in cursor:
+            results.append(Category(**row))
+
+        cursor.close()
+        conn.close()
+        return results
 
     @staticmethod
     def getDateRange():

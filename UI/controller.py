@@ -10,6 +10,16 @@ class Controller:
         # the model, which implements the logic of the program and holds the data
         self._model = model
 
+    def fillDDCategories(self):
+        categories = self._model.getCategories()
+        categoriesDDOptions = list(map(lambda x:ft.dropdown.Option(data= x, key= x.category_name,
+                                                                   on_click = self._chioceCategory), categories))
+        self._view._ddcategory.options = categoriesDDOptions
+        self._view.update_page()
+
+    def _chioceCategory(self, e):
+        self._categoryValue = e.control.data
+
     def handleCreaGrafo(self, e):
         pass
 
