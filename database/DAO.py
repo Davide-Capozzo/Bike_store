@@ -1,5 +1,6 @@
 from database.DB_connect import DBConnect
 from model.category import Category
+from model.product import Product
 
 
 class DAO():
@@ -46,3 +47,22 @@ class DAO():
         cursor.close()
         conn.close()
         return first, last
+
+    @staticmethod
+    def getProductsByCategory(c):
+
+        conn = DBConnect.get_connection()
+
+        results = []
+
+        cursor = conn.cursor(dictionary=True)
+        query = """select * from products p where p.category_id = %s """
+
+        cursor.execute(query, (c.category_id,))
+
+        for row in cursor:
+            results.append(Product(**row))
+
+        cursor.close()
+        conn.close()
+        return results
