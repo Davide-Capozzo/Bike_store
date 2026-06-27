@@ -42,7 +42,16 @@ class Controller:
 
 
     def handleBestProdotti(self, e):
-        pass
+        listBestProdotti = self._model.getNodiPiuProfittevoli()
+        self._view.txt_result.controls.clear()
+        self._view.txt_result.controls.append(ft.Text("Di sewguito i nodi"
+                                                      "più profittevoli:"))
+        for p in listBestProdotti:
+            self._view.txt_result.controls.append(ft.Text(f"{p[0]} - score = {p[1]}"))
+        self._view.update_page()
+
+
+
 
     def handleCercaCammino(self, e):
         pass
