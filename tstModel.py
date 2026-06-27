@@ -3,7 +3,7 @@ from model.model import Model
 
 mymdl = Model()
 
-c = Category(7, "Road Bikes")
+c = Category(5, "Electric Bikes")
 mymdl.buildGraph(c)
 n,e = mymdl.getGraphDetails()
 print("N° di nodi:", n, "N° di archi:", e)

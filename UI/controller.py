@@ -9,6 +9,7 @@ class Controller:
         self._view = view
         # the model, which implements the logic of the program and holds the data
         self._model = model
+        self._categoryValue = None
 
     def fillDDCategories(self):
         categories = self._model.getCategories()
@@ -21,7 +22,24 @@ class Controller:
         self._categoryValue = e.control.data
 
     def handleCreaGrafo(self, e):
-        pass
+        cat = self._categoryValue
+        date1 = self._view._dp1.value #la data scelta da utente
+        date2 = self._view._dp2.value #la seconda data
+                                    #sul drop down due
+        self._model.buildGraph(cat, date1, date2)
+
+        nNodi, nArchi = self._model.getGraphDetails()
+        self._view.txt_result.controls.clear()
+        self._view.txt_result.controls.append(ft.Text("Date selezionate:"))
+        self._view.txt_result.controls.append(ft.Text(f"Start date: {self._view._dp1.value}"))
+        self._view.txt_result.controls.append(ft.Text(f"End date: {self._view._dp2.value}"))
+        self._view.txt_result.controls.append(ft.Text("Grafo Creato"))
+        self._view.txt_result.controls.append(ft.Text(f"Numero di nodi: {nNodi}"))
+        self._view.txt_result.controls.append(ft.Text(f"Numero di archi: {nArchi}"))
+
+        self._view.update_page()
+
+
 
     def handleBestProdotti(self, e):
         pass
